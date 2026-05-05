@@ -22,6 +22,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const registerSchema = z.object({
   email: z.string().email("Please enter valid email."),
@@ -86,6 +87,12 @@ const RegisterForm = () => {
                   type="button"
                   disabled={isPending}
                 >
+                    <Image
+                      src={"/logos/github.svg"}
+                      alt="Github"
+                      width={20}
+                      height={20}
+                    />
                   Continue with Github
                 </Button>
                 <Button
@@ -94,6 +101,12 @@ const RegisterForm = () => {
                   type="button"
                   disabled={isPending}
                 >
+                    <Image
+                      src={"/logos/google.svg"}
+                      alt="Github"
+                      width={20}
+                      height={20}
+                    />
                   Continue with Google
                 </Button>
               </div>
