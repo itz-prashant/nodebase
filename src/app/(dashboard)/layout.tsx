@@ -4,6 +4,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 
 
 const dashboardLayout = ({children}:{children: React.ReactNode}) => {
+  
   return (
     <SidebarProvider>
     <TooltipProvider>
