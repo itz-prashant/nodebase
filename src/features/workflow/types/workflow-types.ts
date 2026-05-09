@@ -22,3 +22,10 @@ export type EntitySearchProps = {
   onChange: (value: string)=> void
   placeholder?: string
 }
+
+export interface EntityPaginationProps {
+  page: number,
+  onPageChange: (page:number)=> void
+  totalPages: number
+  disabled?: boolean
+}
