@@ -37,3 +37,22 @@ export interface StateViewProps {
 export interface EmptyViewProps extends StateViewProps {
   onNew?: () => void;
 }
+
+export interface EntityListProps<T>{
+  items: T[]
+  renderItem: (item:T, index: number)=> React.ReactNode
+  getKey?: (item:T, index: number)=> string | number
+  emptyView?: React.ReactNode;
+  classname?: string
+}
+
+export interface EntityItemProps{
+  href: string;
+  title: string;
+  subtitle?: React.ReactNode;
+  image?: React.ReactNode;
+  actions?: React.ReactNode;
+  onRemove?: ()=> void | Promise<void>
+  isRemoving?: boolean;
+  className?:string;
+}
