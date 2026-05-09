@@ -1,5 +1,5 @@
 "use client";
-import { EntityContaianer, EntityHeader, EntityPagination, EntitySearch } from "@/components/entity-components";
+import { EmptyView, EntityContaianer, EntityHeader, EntityPagination, EntitySearch, ErrorView, LoadingView } from "@/components/entity-components";
 import { useCreateWorkflow, useSuspenseWorkflows } from "../hooks/use-workflows";
 import { useRouter } from "next/navigation";
 import { useUpgradeModal } from "@/hooks/use-upgrade-modal";
@@ -72,6 +72,43 @@ export const WorkflowPagination = ()=>{
       /> 
     )
 }
+
+
+export const WorkflowsLoading = ()=>{
+  return <LoadingView message="Loading workflows...."/>
+}
+
+export const WorkflowsError = ()=>{
+  return <ErrorView message="Error loading workflows"/>
+}
+
+export const WorkflowsEmpty = ()=>{
+  const router = useRouter()
+  const craeteWorkflow = useCreateWorkflow()
+  const {handleError, modal} = useUpgradeModal()
+
+   const handleCreate = ()=>{
+        craeteWorkflow.mutate(undefined, {
+            onError:(error)=>{
+                handleError(error)
+            },
+            onSuccess:(data)=>{
+                router.push(`/workflows/${data.id}`)
+            },
+        })}
+    
+
+  return (
+    <>
+    {modal}
+      <EmptyView 
+      onNew={handleCreate}
+        message="You haven't created any workflow yet. Get started by creating your workflow"
+      />
+    </>
+  )
+}
+
 
 export const WorkflowContainer = ({
   children,

@@ -29,3 +29,11 @@ export interface EntityPaginationProps {
   totalPages: number
   disabled?: boolean
 }
+
+export interface StateViewProps {
+  message?: string;
+}
+
+export interface EmptyViewProps extends StateViewProps {
+  onNew?: () => void;
+}

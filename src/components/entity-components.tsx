@@ -1,8 +1,9 @@
-import { EntityContainerProps, EntityHeaderProps, EntityPaginationProps, EntitySearchProps } from "@/features/workflow/types/workflow-types";
+import { EmptyViewProps, EntityContainerProps, EntityHeaderProps, EntityPaginationProps, EntitySearchProps, StateViewProps } from "@/features/workflow/types/workflow-types";
 import { Button } from "./ui/button";
-import { PlusIcon, SearchIcon } from "lucide-react";
+import { AlertTriangleIcon, Loader2Icon, PackageOpenIcon, PlusIcon, SearchIcon } from "lucide-react";
 import Link from "next/link";
 import { Input } from "./ui/input";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./ui/empty";
 
 export const EntityHeader = ({
   title,
@@ -112,3 +113,41 @@ return (
     </div>
   )
 }
+
+
+export const LoadingView = ({ message }: StateViewProps) => {
+  return (
+    <div className="flex justify-center items-center h-full flex-1 flex-col gap-y-4">
+      <Loader2Icon className="size-6 animate-spin text-primary" />
+      {!!message && <p className="text-sm text-muted-foreground">{message}</p>}
+    </div>
+  );
+};
+
+export const ErrorView = ({ message }: StateViewProps) => {
+  return (
+    <div className="flex justify-center items-center h-full flex-1 flex-col gap-y-4">
+      <AlertTriangleIcon className="size-6 text-primary" />
+      {!!message && <p className="text-sm text-muted-foreground">{message}</p>}
+    </div>
+  );
+};
+
+export const EmptyView = ({ onNew, message }: EmptyViewProps) => {
+  return (
+    <Empty className="border border-dashed bg-white">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <PackageOpenIcon />
+        </EmptyMedia>
+      </EmptyHeader>
+      <EmptyTitle>No Items</EmptyTitle>
+      {!!message && <EmptyDescription>{message}</EmptyDescription>}
+      {!!onNew && (
+      <EmptyContent>
+        <Button onClick={onNew}>Add item</Button>
+      </EmptyContent>
+      )}
+    </Empty>
+  );
+};
