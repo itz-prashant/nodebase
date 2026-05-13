@@ -14,7 +14,7 @@ import { Separator } from "./ui/separator";
 import { useCallback } from "react";
 import { useReactFlow } from "@xyflow/react";
 import { toast } from "sonner";
-import {createId} from '@paralleldrive/cuid2'
+import { createId } from "@paralleldrive/cuid2";
 
 type NodeSelectorProps = {
   open: boolean;
